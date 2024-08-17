@@ -3,12 +3,29 @@
 
 using namespace std;
 
-void hello()
+void helloNumber( int n)
 {
-    cout << " hello thread " << "\n";
+    cout <<" hello thread " << "\n";
+    cout <<" number is "<< n << "\n";
 }
 
-void fun(thread thr)
+
+void hello( )
+{
+    cout << " hello thread " << "\n";\
+}
+
+thread funReturn()
+{
+       thread threturn(helloNumber , 12);
+
+       cout << " threturn id : "<< threturn.get_id() << "\n";
+
+       return threturn;
+
+}
+
+void fun(thread &&thr)
 {
 
     cout << " movin owenrship of thread \n";
@@ -28,4 +45,12 @@ int main()
     cout << "id for thr for in main after moving: " << th.get_id() << "\n";
 
     fun(thread(hello)); // temporary object.
+
+
+    thread getthr = funReturn();
+
+    cout << " thReturn id gethtr : "<< getthr.get_id() << "\n";
+
+    getthr.join();
+
 }
